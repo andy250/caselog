@@ -1,0 +1,17 @@
+﻿@model System.Collections.Generic.IEnumerable<andy250.CaseLog.Core.Configuration.HostInfo>
+@{
+    ViewBag.Title = "Main";
+}
+
+<div class="uk-container uk-container-center">
+    <h2>CaseLog</h2>
+    <h3>Hosts</h3>
+    <select class="cl-select" id="hosts-select">
+        @foreach (var h in Model)
+        {
+            <option value="@h.unc">@h.name</option>
+        }
+    </select>
+    <select class="cl-select" id="folders-select" disabled="disabled">
+    </select>
+</div>

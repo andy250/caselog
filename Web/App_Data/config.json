@@ -1,0 +1,20 @@
+﻿[
+    {
+        "name": "localhost",
+        "folders": [
+            {
+                "name": "S0me l0gs",
+                "path": "C:\\Users\\akowa\\Documents\\Logs",
+                "absolute": true,
+                "filter": "*.log"
+            },
+            {
+                "name": "S0me l0gs 2",
+                "path": "C:\\Users\\akowa\\Documents\\Logs2",
+                "absolute": false,
+                "filter": "*.txt"
+            }
+        ]
+    }
+    // , { host2 } , { host 3 } , ...
+]
