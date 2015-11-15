@@ -4,6 +4,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - CaseLog</title>
+    <link href="~/Static/style/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Static/style/jquery-ui.theme.css" rel="stylesheet" />
     <link href="~/Static/style/Site.css" rel="stylesheet" />
 </head>
 <body>
@@ -11,5 +13,12 @@
         @RenderBody()
     </div>
     <script src="~/Static/libs/jquery-1.10.2.js"></script>
+    <script src="~/Static/libs/jquery-ui.js"></script>
+    @RenderSection("js", required: false)
+    <script>
+        $(document).ready(function () {
+            @RenderSection("docReady", required: false)
+        });
+    </script>
 </body>
 </html>

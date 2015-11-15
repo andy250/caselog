@@ -1,17 +1,41 @@
-﻿@model System.Collections.Generic.IEnumerable<andy250.CaseLog.Core.Configuration.HostInfo>
+﻿@model IEnumerable<andy250.CaseLog.Core.Configuration.HostInfo>
 @{
     ViewBag.Title = "Main";
 }
 
-<div class="uk-container uk-container-center">
-    <h2>CaseLog</h2>
-    <h3>Hosts</h3>
-    <select class="cl-select" id="hosts-select">
-        @foreach (var h in Model)
-        {
-            <option value="@h.unc">@h.name</option>
-        }
-    </select>
-    <select class="cl-select" id="folders-select" disabled="disabled">
-    </select>
-</div>
+<h1>CaseLog</h1>
+
+<section>
+    <div class="cl-form-field oneline">
+        <select class="cl-select" id="host-select">
+            @foreach (var h in Model)
+            {
+                <option value="@h.unc">@h.name</option>
+            }
+        </select>
+    </div>
+    <div class="form-field oneline">
+        <select class="cl-select" id="folder-select" disabled="disabled"></select>
+    </div>
+    <div class="form-field oneline">
+        <select class="cl-select" id="file-select" disabled="disabled"></select>
+    </div>
+</section>
+
+<section>
+    File content...
+</section>
+
+@section js
+{
+    <script src="~/Static/scripts/LogNavigator.js"></script>
+}
+
+@section docReady
+{
+    $(document).LogNavigator({
+        host: '#host-select',
+        folder: '#folder-select',
+        file: '#file-select'
+    });
+}
