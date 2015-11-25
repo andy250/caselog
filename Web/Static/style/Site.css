@@ -22,8 +22,9 @@ body {
     width: 100% !important;
 }
 
-h1 {
-    margin: 4px 0;
+.cl-title {
+    font-size: 2em;
+    font-weight: bold;
 }
 
 .cl-head {

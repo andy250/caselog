@@ -17,6 +17,7 @@
             .done(function(result) {
                 me.element.find(me.options.log).html(result);
                 me.filter(data);
+                me.element.scrollTop(me.element[0].scrollHeight);
             });
     },
 

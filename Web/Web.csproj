@@ -130,7 +130,7 @@
     <Content Include="Static\style\jquery-ui.theme.css" />
     <Content Include="Static\style\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="App_Data\config.json" />
+    <None Include="App_Data\config.json" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Master.cshtml" />
@@ -151,7 +151,8 @@
     <Content Include="packages.config" />
     <Content Include="Views\Home\_SelectMenu.cshtml" />
     <Content Include="Views\Home\_Log.cshtml" />
-    <Content Include="App_Data\config.doc.json" />
+    <None Include="App_Data\config.doc.json" />
+    <None Include="Properties\PublishProfiles\201.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

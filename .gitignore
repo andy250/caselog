@@ -51,5 +51,5 @@ Ankh.NoLoad
 **/packages/*
 !**/packages/build/
 
-Web/AppData/config.json
-
+/Web/App_Data/config.json
+/Web/Properties/PublishProfiles/*.pubxml
