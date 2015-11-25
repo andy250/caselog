@@ -5,7 +5,7 @@
             {
                 "name": "Logs1",
                 "path": "C:\\MyFolder\\Logs1",
-                "linePattern": "^\\d+\\t\\[[A-Z][a-z]+\\]\\t", // 1234	[Debug]
+                "linePattern": "^\\d+\\s+\\[[A-Z][a-z]+\\]\\s+", // 1234	[Debug]
                 "filter": "*.log"
             },
             {
