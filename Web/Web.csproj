@@ -112,6 +112,9 @@
     <Content Include="Static\libs\jquery-1.10.2.js" />
     <Content Include="Static\libs\jquery-ui.js" />
     <Content Include="Static\scripts\LogNavigator.js" />
+    <Content Include="Static\scripts\LogReader.js" />
+    <Content Include="Static\scripts\Master.js" />
+    <Content Include="Static\scripts\Tools.js" />
     <Content Include="Static\style\images\ui-bg_glass_55_fbf9ee_1x400.png" />
     <Content Include="Static\style\images\ui-bg_glass_65_ffffff_1x400.png" />
     <Content Include="Static\style\images\ui-bg_glass_75_dadada_1x400.png" />
@@ -140,11 +143,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogEntryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Views\Home\_SelectMenu.cshtml" />
+    <Content Include="Views\Home\_Log.cshtml" />
+    <Content Include="App_Data\config.doc.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -152,9 +159,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{85345d3a-8bf9-464a-bf64-a0348d2bdb7e}</Project>

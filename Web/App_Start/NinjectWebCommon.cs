@@ -1,3 +1,7 @@
+using andy250.CaseLog.Core.FileIO;
+using andy250.CaseLog.Core.Interfaces;
+using andy250.CaseLog.Core.LogIO;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(andy250.CaseLog.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(andy250.CaseLog.Web.App_Start.NinjectWebCommon), "Stop")]
 
@@ -64,6 +68,8 @@ namespace andy250.CaseLog.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IConfigProvider>().To<ConfigProvider>().InSingletonScope();
+            kernel.Bind<ILogReader>().To<LogReader>();
+            kernel.Bind<IFileSystem>().To<FileSystem>();
         }        
     }
 }

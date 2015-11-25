@@ -1,0 +1,19 @@
+﻿@model IEnumerable<andy250.CaseLog.Web.Models.LogEntryModel>
+
+@{
+    Layout = null;
+    var index = 0;
+}
+
+@foreach (var log in Model)
+{
+    index++;
+    @:<div class="cl-log-entry cl-log-entry-@(index%2==0?"even":"odd") cl-log-level-@log.LogLevel" data-level="@log.LogLevel">
+        var subIndex = 0;
+        foreach (var line in log.Lines)
+        {
+            subIndex++;
+            @:<section class="@(subIndex==1?"main":"sub")">@line</section>
+        }
+    @:</div>
+}

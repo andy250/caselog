@@ -1,41 +1,74 @@
 ﻿@model IEnumerable<andy250.CaseLog.Core.Configuration.HostInfo>
+
 @{
     ViewBag.Title = "Main";
 }
 
-<h1>CaseLog</h1>
-
-<section>
-    <div class="cl-form-field oneline">
-        <select class="cl-select" id="host-select">
-            @foreach (var h in Model)
+<section class="cl-head">
+    <h1>CaseLog</h1>
+    <section class="cl-filters">
+        <div class="cl-form-field">
+            <select class="cl-select" id="host-select">
+                @foreach (var h in Model)
             {
-                <option value="@h.unc">@h.name</option>
-            }
-        </select>
-    </div>
-    <div class="form-field oneline">
-        <select class="cl-select" id="folder-select" disabled="disabled"></select>
-    </div>
-    <div class="form-field oneline">
-        <select class="cl-select" id="file-select" disabled="disabled"></select>
-    </div>
+                    <option value="@h.name">@h.name</option>
+                }
+            </select>
+        </div>
+        <div class="cl-form-field">
+            <select class="cl-select" id="folder-select"></select>
+        </div>
+        <div class="cl-form-field">
+            <select class="cl-select" id="file-select"></select>
+        </div>
+        <div class="cl-form-field">
+            <select id="log-filter"></select>
+        </div>
+
+        <div class="cl-form-field flex-right">
+            <div id="toolbar" class="">
+                <input type="button" id="reload-config" value="Reload config"/>
+            </div>
+        </div>
+    </section>
 </section>
 
-<section>
-    File content...
+<section class="cl-content">
+    <div id="main-log" class="cl-log">
+
+    </div>
 </section>
 
 @section js
 {
     <script src="~/Static/scripts/LogNavigator.js"></script>
+    <script src="~/Static/scripts/LogReader.js"></script>
+    <script src="~/Static/scripts/Tools.js"></script>
 }
 
 @section docReady
 {
+    var logReader = $(document).find('.cl-content');
+
+    $(document)
+        .on('lognavigatorread', function (e, data) {
+            logReader.LogReader('read', data);
+        })
+        .on('lognavigatorfilter', function (e, data) {
+            logReader.LogReader('filter', data);
+        });
+    
+    logReader.LogReader({
+        log: '#main-log',
+        logEntry: '.cl-log-entry'
+    });
+
     $(document).LogNavigator({
         host: '#host-select',
         folder: '#folder-select',
-        file: '#file-select'
+        file: '#file-select',
+        level: '#log-filter'
     });
+
+    $(document).find('#toolbar').Tools();
 }

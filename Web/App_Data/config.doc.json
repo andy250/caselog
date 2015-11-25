@@ -1,0 +1,19 @@
+﻿[
+    {
+        "name": "localhost",
+        "folders": [
+            {
+                "name": "Logs1",
+                "path": "C:\\MyFolder\\Logs1",
+                "linePattern": "^\\d+\\t\\[[A-Z][a-z]+\\]\\t", // 1234	[Debug]
+                "filter": "*.log"
+            },
+            {
+                "name": "Logs2",
+                "path": "C:\\MyFolder\\Logs2",
+                "filter": "*.txt"
+            }
+        ]
+    }
+    // , { host2 } , { host 3 } , ...
+]

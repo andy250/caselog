@@ -47,6 +47,9 @@ Ankh.NoLoad
 #Other
 .svn
 
-# Include DLLs if they're in the NuGet packages directory
-!/packages/*/lib/*.dll
-!/packages/*/lib/*/*.dll
+# Exclude packages - use restore
+**/packages/*
+!**/packages/build/
+
+Web/AppData/config.json
+
