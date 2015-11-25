@@ -17,7 +17,7 @@ namespace andy250.CaseLog.Core.FileIO
         public FileReverseReader(string path)
         {
             disposed = false;
-            file = new FileStream(path, FileMode.Open, FileAccess.Read);
+            file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             encoding = FindEncoding(file);
             SetupCharacterStartDetector();
         }

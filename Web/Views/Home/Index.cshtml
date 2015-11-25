@@ -5,12 +5,12 @@
 }
 
 <section class="cl-head">
-    <h1>CaseLog</h1>
     <section class="cl-filters">
+        <span class="cl-form-field cl-title">CaseLog</span>
         <div class="cl-form-field">
             <select class="cl-select" id="host-select">
                 @foreach (var h in Model)
-            {
+                {
                     <option value="@h.name">@h.name</option>
                 }
             </select>

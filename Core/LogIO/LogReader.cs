@@ -11,7 +11,7 @@ namespace andy250.CaseLog.Core.LogIO
         {
             // for now let's just read from file
             var fileSource = (FileLogSource) source;
-            return new FileLogReader(fileSource).ReadFromEnd(200);
+            return new FileLogReader(fileSource).ReadFromEnd(500);
         }
     }
 }

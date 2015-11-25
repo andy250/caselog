@@ -45,11 +45,8 @@
             data: data
         })
             .done(function(result) {
-                me.element.find(destSelector)
-                    .empty()
-                    .append(result)
-                    .selectmenu('refresh')
-                    .trigger('selectmenuchange');
+                me.element.find(destSelector).empty();
+                me.element.find(destSelector).append(result.trim()).selectmenu('refresh').trigger('selectmenuchange');
             });
     },
 
@@ -65,12 +62,15 @@
     },
 
     _loadLog: function () {
-        this._trigger('read', null, {
-            host: this.element.find(this.options.host).val(),
-            folder: this.element.find(this.options.folder).val(),
-            file: this.element.find(this.options.file).val(),
-            level: this.element.find(this.options.level).val()
-        });
+        var file = this.element.find(this.options.file).val();
+        if (file) {
+            this._trigger('read', null, {
+                host: this.element.find(this.options.host).val(),
+                folder: this.element.find(this.options.folder).val(),
+                file: this.element.find(this.options.file).val(),
+                level: this.element.find(this.options.level).val()
+            });
+        }
     },
 
     _loadLogLevels: function() {
