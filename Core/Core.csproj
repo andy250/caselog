@@ -47,7 +47,17 @@
     <Compile Include="Configuration\ConfigProvider.cs" />
     <Compile Include="Configuration\FolderInfo.cs" />
     <Compile Include="Configuration\HostInfo.cs" />
-    <Compile Include="Configuration\IConfigProvider.cs" />
+    <Compile Include="FileIO\FileLogSource.cs" />
+    <Compile Include="FileIO\FileSystem.cs" />
+    <Compile Include="Interfaces\IConfigProvider.cs" />
+    <Compile Include="FileIO\FileReverseReader.cs" />
+    <Compile Include="Interfaces\IFileSystem.cs" />
+    <Compile Include="LogIO\FileLogReader.cs" />
+    <Compile Include="LogIO\LogReader.cs" />
+    <Compile Include="Interfaces\ILogReader.cs" />
+    <Compile Include="Interfaces\ILogSource.cs" />
+    <Compile Include="Models\LogEntry.cs" />
+    <Compile Include="Models\LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

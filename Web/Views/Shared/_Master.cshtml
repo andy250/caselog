@@ -9,11 +9,10 @@
     <link href="~/Static/style/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <div>
-        @RenderBody()
-    </div>
+    @RenderBody()
     <script src="~/Static/libs/jquery-1.10.2.js"></script>
     <script src="~/Static/libs/jquery-ui.js"></script>
+    <script src="~/Static/scripts/Master.js"></script>
     @RenderSection("js", required: false)
     <script>
         $(document).ready(function () {

@@ -75,7 +75,7 @@ $.fn.extend({
 		return function() {
 			return this.each(function() {
 				if ( !this.id ) {
-					this.id = "ui-id-" + ( ++uuid );
+					this.id = "ui-host-" + ( ++uuid );
 				}
 			});
 		};
@@ -84,7 +84,7 @@ $.fn.extend({
 	removeUniqueId: function() {
 		return this.each(function() {
 			if ( /^ui-id-\d+$/.test( this.id ) ) {
-				$( this ).removeAttr( "id" );
+				$( this ).removeAttr( "host" );
 			}
 		});
 	}
@@ -1896,7 +1896,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 			helper = helperIsFunction ?
 				$( o.helper.apply( this.element[ 0 ], [ event ] ) ) :
 				( o.helper === "clone" ?
-					this.element.clone().removeAttr( "id" ) :
+					this.element.clone().removeAttr( "host" ) :
 					this.element );
 
 		if (!helper.parents("body").length) {
@@ -4278,7 +4278,7 @@ $.widget( "ui.button", {
 			// we don't search against the document in case the element
 			// is disconnected from the DOM
 			ancestor = this.element.parents().last();
-			labelSelector = "label[for='" + this.element.attr("id") + "']";
+			labelSelector = "label[for='" + this.element.attr("host") + "']";
 			this.buttonElement = ancestor.find( labelSelector );
 			if ( !this.buttonElement.length ) {
 				ancestor = ancestor.length ? ancestor.siblings() : this.element.siblings();
@@ -4602,7 +4602,7 @@ function Datepicker() {
 	$.extend(this._defaults, this.regional[""]);
 	this.regional.en = $.extend( true, {}, this.regional[ "" ]);
 	this.regional[ "en-US" ] = $.extend( true, {}, this.regional.en );
-	this.dpDiv = datepicker_bindHover($("<div id='" + this._mainDivId + "' class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>"));
+	this.dpDiv = datepicker_bindHover($("<div host='" + this._mainDivId + "' class='ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>"));
 }
 
 $.extend(Datepicker.prototype, {
@@ -4790,7 +4790,7 @@ $.extend(Datepicker.prototype, {
 		if (!inst) {
 			this.uuid += 1;
 			id = "dp" + this.uuid;
-			this._dialogInput = $("<input type='text' id='" + id +
+			this._dialogInput = $("<input type='text' host='" + id +
 				"' style='position: absolute; top: -100px; width: 0px;'/>");
 			this._dialogInput.keydown(this._doKeyDown);
 			$("body").append(this._dialogInput);
@@ -6734,7 +6734,7 @@ var dialog = $.widget( "ui.dialog", {
 
 					// Hiding a focused element doesn't trigger blur in WebKit
 					// so in case we have nothing to focus on, explicitly blur the active element
-					// https://bugs.webkit.org/show_bug.cgi?id=47182
+					// https://bugs.webkit.org/show_bug.cgi?host=47182
 					$( activeElement ).blur();
 				}
 			} catch ( error ) {}
@@ -6905,7 +6905,7 @@ var dialog = $.widget( "ui.dialog", {
 		// otherwise we brute force the content as the description
 		if ( !this.element.find( "[aria-describedby]" ).length ) {
 			this.uiDialog.attr({
-				"aria-describedby": this.element.uniqueId().attr( "id" )
+				"aria-describedby": this.element.uniqueId().attr( "host" )
 			});
 		}
 	},
@@ -6955,7 +6955,7 @@ var dialog = $.widget( "ui.dialog", {
 		this._title( uiDialogTitle );
 
 		this.uiDialog.attr({
-			"aria-labelledby": uiDialogTitle.attr( "id" )
+			"aria-labelledby": uiDialogTitle.attr( "host" )
 		});
 	},
 
@@ -7689,7 +7689,7 @@ var menu = $.widget( "ui.menu", {
 				item
 					.attr( "aria-haspopup", "true" )
 					.prepend( submenuCarat );
-				menu.attr( "aria-labelledby", item.attr( "id" ) );
+				menu.attr( "aria-labelledby", item.attr( "host" ) );
 			});
 
 		menus = submenus.add( this.element );
@@ -7753,7 +7753,7 @@ var menu = $.widget( "ui.menu", {
 		// Only update aria-activedescendant if there's a role
 		// otherwise we assume focus is managed elsewhere
 		if ( this.options.role ) {
-			this.element.attr( "aria-activedescendant", focused.attr( "id" ) );
+			this.element.attr( "aria-activedescendant", focused.attr( "host" ) );
 		}
 
 		// Highlight active parent menu item, if any
@@ -8068,7 +8068,7 @@ var selectmenu = $.widget( "ui.selectmenu", {
 	},
 
 	_create: function() {
-		var selectmenuId = this.element.uniqueId().attr( "id" );
+		var selectmenuId = this.element.uniqueId().attr( "host" );
 		this.ids = {
 			element: selectmenuId,
 			button: selectmenuId + "-button",
@@ -8181,7 +8181,7 @@ var selectmenu = $.widget( "ui.selectmenu", {
 					that.focusIndex = item.index;
 
 					that.button.attr( "aria-activedescendant",
-						that.menuItems.eq( item.index ).attr( "id" ) );
+						that.menuItems.eq( item.index ).attr( "host" ) );
 				}
 			})
 			.menu( "instance" );
@@ -8506,7 +8506,7 @@ var selectmenu = $.widget( "ui.selectmenu", {
 	},
 
 	_setAria: function( item ) {
-		var id = this.menuItems.eq( item.index ).attr( "id" );
+		var id = this.menuItems.eq( item.index ).attr( "host" );
 
 		this.button.attr({
 			"aria-labelledby": id,

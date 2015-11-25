@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using andy250.CaseLog.Core.Interfaces;
 
 namespace andy250.CaseLog.Core.Configuration
 {
@@ -17,6 +19,11 @@ namespace andy250.CaseLog.Core.Configuration
         public List<HostInfo> GetHosts()
         {
             return hosts;
+        }
+
+        public HostInfo GetHost(string host)
+        {
+            return hosts.SingleOrDefault(x => string.Equals(x.name, host, StringComparison.OrdinalIgnoreCase));
         }
 
         public void Reload()
