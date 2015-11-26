@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using andy250.CaseLog.Core.FileIO;
@@ -20,16 +21,32 @@ namespace andy250.CaseLog.Web.Controllers
             this.fileSystem = fileSystem;
         }
 
-        public ActionResult Index()
+        public ViewResult Inspector(string hostName, string folderName)
         {
-            var model = configProvider.Config.Hosts;
+            var model = new LogInspectorModel();
+            model.Hosts = configProvider.Config.Hosts;
+            model.SelectedHost = hostName;
+            model.SelectedFolder = folderName;
             return View(model);
         }
 
-        public ActionResult Folders(string host)
+        public ViewResult Dashboard()
+        {
+            var model = new DashboardModel();
+            model.Hosts = configProvider.Config.Hosts;
+            return View(model);
+        }
+
+        public ActionResult Folders(string host, string selectedFolder)
         {
             var folders = configProvider.Config.GetHost(host).Folders;
-            var model = folders.Select(x => new SelectListItem { Value = x.Name, Text = x.Name });
+            var model = folders.Select(x =>
+                new SelectListItem
+                {
+                    Value = x.Name,
+                    Text = x.Name,
+                    Selected = selectedFolder != null && string.Equals(selectedFolder, x.Name, StringComparison.OrdinalIgnoreCase)
+                });
             return View("_SelectMenu", model);
         }
 
@@ -65,7 +82,7 @@ namespace andy250.CaseLog.Web.Controllers
             var logs = logReader.ReadFromEnd(source);
             var model = logs.Select(x => new LogEntryModel(x));
 
-            return View("_Log", model);
+            return View("_Logs", model);
         }
 
         public EmptyResult ReloadConfig()

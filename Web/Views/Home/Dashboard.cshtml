@@ -1,0 +1,34 @@
+﻿@model andy250.CaseLog.Web.Models.DashboardModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<header>
+    <span class="cl-form-field cl-title">CaseLog</span>
+</header>
+
+<main id="dash">
+    @foreach (var host in Model.Hosts)
+    {
+        <section class="host ui-widget ui-widget-content ui-corner-all ui-front">
+            <header>@host.Name</header>
+            <nav>
+                @foreach (var folder in host.Folders)
+                {
+                    <a class="button" href="@Url.RouteUrl("Inspector", new { hostName = host.Name, folderName = folder.Name })">@folder.Name</a>
+                }
+            </nav>
+        </section>
+    }
+</main>
+
+@section js
+{
+    <script src="~/Static/scripts/Dashboard.js"></script>
+}
+
+@section docReady
+{
+    var dash = $(document).find('#dash').Dashboard();
+}

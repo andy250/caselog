@@ -30,7 +30,7 @@
             "name": "Server 2",
             "unc": "192.168.0.2",
             "filter": "*.txt",
-            "openingLinePattern": "^\\d+\\s+"
+            "openingLinePattern": "^\\d+\\s+",
             "folders": [
                 {
                     "name": "Logs 3",

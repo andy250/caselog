@@ -4,17 +4,12 @@ body {
 }
 
 body {
-    padding: 8px;
     margin: 0;
     box-sizing: border-box;
     font-size: 12px;
     display: flex;
     flex-flow: column;
     font-family: sans-serif;
-}
-
-button.no-text.ui-button-text-icon-primary .ui-button-text {
-    padding: 1.1em 1.2em;
 }
 
 .flex-right {
@@ -31,29 +26,35 @@ button.no-text.ui-button-text-icon-primary .ui-button-text {
     font-weight: bold;
 }
 
-.cl-head {
-    margin-bottom: 6px;
+header {
+    padding: 0.8em 0.8em 0;
     flex: 0 1 auto;
-}
-
-.cl-head .cl-filters {
     display: flex;
     flex-flow: row;
 }
 
-.cl-head .cl-filters .cl-form-field {
-    margin-right: 10px;
+header a,
+header a:visited {
+    text-decoration: none;
+    color: #222;
 }
 
-.cl-head .cl-filters .cl-form-field.flex-right {
+header .cl-form-field {
+    margin-right: 0.8em;
+}
+
+header .cl-form-field.flex-right {
     margin-right: 0;
 }
 
-.cl-content {
+main {
     flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+main.cl-content {
     border: 1px solid #aaa;
-    background-color: #eee;
-    overflow-y: scroll;
+    margin: 0.8em;
 }
 
 .cl-log {
@@ -61,12 +62,12 @@ button.no-text.ui-button-text-icon-primary .ui-button-text {
     height: 100%;
     background: #eee;
     color: #000;
-    font-family: courier;
+    font-family: "Courier New", Courier, monospace;
     font-size: 1.25em;
 }
 
 .cl-log-entry {
-    padding: 4px;
+    padding: 0.5em;
     border-bottom: 1px #aaa dashed;
 }
 
@@ -90,3 +91,39 @@ button.no-text.ui-button-text-icon-primary .ui-button-text {
 .cl-log-entry-even {
     background-color: #fff;
 }
+
+main#dash {
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: border-box;
+    align-items: flex-start;
+    padding: 0.4em;
+}
+
+section.host {
+    flex: 0 1 auto;
+    margin: 0.4em;
+    max-width: 200px;
+}
+
+    section.host header {
+        text-align: center;
+        display: block;
+        font-size: 1.3em;
+        font-weight: bold;
+        border-bottom: 1px solid #ddd;
+        padding: 0.4em 0;
+        margin: 0;
+    }
+
+    section.host > nav {
+        padding: 0.2em;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between
+    }
+
+        section.host > nav > a {
+            flex: 1 1 auto;
+            margin: 0.2em;
+        }

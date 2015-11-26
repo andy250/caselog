@@ -1,0 +1,79 @@
+﻿@model andy250.CaseLog.Web.Models.LogInspectorModel
+
+@{
+    ViewBag.Title = "Log Viewer";
+}
+
+<header>
+    <div class="cl-form-field cl-title"><a href="/">CaseLog</a></div>
+    <div class="cl-form-field">
+        <select class="cl-select" id="host-select">
+            @foreach (var h in Model.Hosts)
+            {
+                <option value="@h.Name" @(string.Equals(h.Name, Model.SelectedHost, StringComparison.OrdinalIgnoreCase) ? "selected" : null)>@h.Name</option>
+            }
+        </select>
+    </div>
+    <div class="cl-form-field">
+        <select class="cl-select" id="folder-select"></select>
+    </div>
+    <div class="cl-form-field">
+        <select class="cl-select" id="file-select"></select>
+    </div>
+    <div class="cl-form-field">
+        <select id="log-filter"></select>
+    </div>
+    <div class="cl-form-field">
+        <button id="refresh">Refresh</button>
+    </div>
+    <div class="cl-form-field flex-right" id="toolbar">
+        <button id="reload-config">Reload config</button>
+        <a href="https://github.com/andy250/caselog/issues" target="_target" id="report-issue">Report issue</a>
+    </div>
+</header>
+
+<main class="cl-content">
+    <section id="main-log" class="cl-log">
+    </section>
+</main>
+
+@section js
+{
+    <script src="~/Static/scripts/LogNavigator.js"></script>
+    <script src="~/Static/scripts/LogReader.js"></script>
+    <script src="~/Static/scripts/Tools.js"></script>
+}
+
+@section docReady
+{
+    var logReader = $(document).find('.cl-content');
+
+    $(document)
+        .on('lognavigatorread', function (e, data) {
+            History.replaceState({}, document.title, "@Url.RouteUrl("Inspector", new { hostName = string.Empty, folderName = string.Empty })/{0}/{1}".format(data.host, data.folder));
+            logReader.LogReader('read', data);
+        })
+        .on('lognavigatorrefresh', function (e, data) {
+            logReader.LogReader('refresh');
+        })
+        .on('lognavigatorfilter', function (e, data) {
+            logReader.LogReader('filter', data);
+        });
+    
+    logReader.LogReader({
+        log: '#main-log',
+        logEntry: '.cl-log-entry'
+    });
+
+    $(document).LogNavigator({
+        host: '#host-select',
+        folder: '#folder-select',
+        file: '#file-select',
+        level: '#log-filter',
+        refresh: '#refresh',
+        startupHost: '@Model.SelectedHost',
+        startupFolder: '@Model.SelectedFolder'
+    });
+
+    $(document).find('#toolbar').Tools();
+}

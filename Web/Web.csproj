@@ -111,6 +111,8 @@
   <ItemGroup>
     <Content Include="Static\libs\jquery-1.10.2.js" />
     <Content Include="Static\libs\jquery-ui.js" />
+    <Content Include="Static\libs\jquery.history.js" />
+    <Content Include="Static\scripts\Dashboard.js" />
     <Content Include="Static\scripts\LogNavigator.js" />
     <Content Include="Static\scripts\LogReader.js" />
     <Content Include="Static\scripts\Master.js" />
@@ -130,12 +132,11 @@
     <Content Include="Static\style\jquery-ui.theme.css" />
     <Content Include="Static\style\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="App_Data\config2.json" />
     <None Include="App_Data\config.json" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Master.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Inspector.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -144,16 +145,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\LogEntryModel.cs" />
+    <Compile Include="Models\LogInspectorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Home\_SelectMenu.cshtml" />
-    <Content Include="Views\Home\_Log.cshtml" />
+    <Content Include="Views\Home\_Logs.cshtml" />
     <None Include="App_Data\config.doc.json" />
     <None Include="Properties\PublishProfiles\201.pubxml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

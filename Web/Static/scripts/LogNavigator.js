@@ -4,41 +4,48 @@
         folder: '',
         file: '',
         level: '',
-        refresh: ''
+        refresh: '',
+        startupHost: '',
+        startupFolder: ''
     },
 
     _create: function () {
         var me = this;
 
-        $(this.options.refresh).button({
-            icons: { primary: 'ui-icon-refresh' }
+        $(me.options.refresh).button({
+            icons: { primary: 'ui-icon-refresh' },
+            text: false
         })
-        .on('click', function () { me._trigger('read', null, me._getReadData()); });
-
-        $(this.options.host)
+        .on('click', $.proxy(me._loadLog, me));
+        
+        $(me.options.host)
             .selectmenu({ width: '100%' })
             .on('selectmenuchange', function () {
                 me._loadFolders();
             });
 
-        $(this.options.folder)
+        $(me.options.folder)
             .selectmenu({ width: '100%' })
             .on('selectmenuchange', function () {
                 me._loadLogLevels();
                 me._loadFiles();
             });
 
-        $(this.options.file)
+        $(me.options.file)
             .selectmenu({ width: '100%' })
-            .on('selectmenuchange', function() {
-                me._loadLog();
-            });
+            .on('selectmenuchange', $.proxy(me._loadLog, me));
 
-        $(this.options.level)
+        $(me.options.level)
             .selectmenu({ width: '100%' })
             .on('selectmenuchange', function () {
                 me._trigger('filter', null, { level: $(this).val() });
             });
+
+        if (me.options.startupFolder) {
+            $(me.element).one('lognavigatorloadingfolders', function (e, data) {
+                data.selectedFolder = me.options.startupFolder;
+            });
+        }
 
         $(this.options.host).trigger('selectmenuchange');
     },
@@ -56,30 +63,38 @@
             });
     },
 
-    _loadFolders: function() {
-        this._loadData({ host: this.element.find(this.options.host).val() }, this.options.folder, '/Home/Folders');
+    _loadFolders: function () {
+        var ajaxData = { host: this.element.find(this.options.host).val() };
+        if (this._trigger('loadingFolders', null, ajaxData)) {
+            this._loadData(ajaxData, this.options.folder, '/Home/Folders');
+        }
     },
 
-    _loadFiles: function() {
-        this._loadData({
-            host: this.element.find(this.options.host).val(),
-            folder: this.element.find(this.options.folder).val()
-        }, this.options.file, '/Home/Files');
+    _loadFiles: function () {
+        if (this._trigger('loadingFiles')) {
+            this._loadData({
+                host: this.element.find(this.options.host).val(),
+                folder: this.element.find(this.options.folder).val()
+            }, this.options.file, '/Home/Files');
+        }
     },
 
     _loadLog: function () {
         var file = this.element.find(this.options.file).val();
         if (file) {
-            this._trigger('read', null, this._getReadData());
+            var ajaxData = this._getReadData();
+            this._trigger('read', null, ajaxData);
         }
     },
 
-    _loadLogLevels: function() {
-        this._loadData({
-                host: this.element.find(this.options.host).val(),
-                folder: this.element.find(this.options.folder).val()
-            },
-            this.options.level, '/Home/LogLevels');
+    _loadLogLevels: function () {
+        if (this._trigger('loadingLogLevels')) {
+            this._loadData({
+                    host: this.element.find(this.options.host).val(),
+                    folder: this.element.find(this.options.folder).val()
+                },
+                this.options.level, '/Home/LogLevels');
+        }
     },
 
     _getReadData: function() {

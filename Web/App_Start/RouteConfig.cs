@@ -10,9 +10,15 @@ namespace andy250.CaseLog.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Inspector",
+                url: "show/{hostName}/{folderName}",
+                defaults: new { controller = "Home", action = "Inspector", hostName = UrlParameter.Optional, folderName = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Dashboard" }
             );
         }
     }
