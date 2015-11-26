@@ -24,10 +24,16 @@
         <div class="cl-form-field">
             <select id="log-filter"></select>
         </div>
+        <div class="cl-form-field">
+            <button id="refresh" class="no-text"></button>
+        </div>
 
         <div class="cl-form-field flex-right">
             <div id="toolbar" class="">
-                <input type="button" id="reload-config" value="Reload config"/>
+                <button id="reload-config">Reload config</button>
+                <a href="https://github.com/andy250/caselog/issues" target="_target">
+                    <button id="report-issue">Report issue</button>
+                </a>
             </div>
         </div>
     </section>
@@ -54,6 +60,9 @@
         .on('lognavigatorread', function (e, data) {
             logReader.LogReader('read', data);
         })
+        .on('lognavigatorrefresh', function (e, data) {
+            logReader.LogReader('refresh');
+        })
         .on('lognavigatorfilter', function (e, data) {
             logReader.LogReader('filter', data);
         });
@@ -67,7 +76,8 @@
         host: '#host-select',
         folder: '#folder-select',
         file: '#file-select',
-        level: '#log-filter'
+        level: '#log-filter',
+        refresh: '#refresh'
     });
 
     $(document).find('#toolbar').Tools();

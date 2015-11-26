@@ -3,11 +3,17 @@
         host: '',
         folder: '',
         file: '',
-        level: ''
+        level: '',
+        refresh: ''
     },
 
     _create: function () {
         var me = this;
+
+        $(this.options.refresh).button({
+            icons: { primary: 'ui-icon-refresh' }
+        })
+        .on('click', function () { me._trigger('read', null, me._getReadData()); });
 
         $(this.options.host)
             .selectmenu({ width: '100%' })
@@ -64,12 +70,7 @@
     _loadLog: function () {
         var file = this.element.find(this.options.file).val();
         if (file) {
-            this._trigger('read', null, {
-                host: this.element.find(this.options.host).val(),
-                folder: this.element.find(this.options.folder).val(),
-                file: this.element.find(this.options.file).val(),
-                level: this.element.find(this.options.level).val()
-            });
+            this._trigger('read', null, this._getReadData());
         }
     },
 
@@ -79,5 +80,14 @@
                 folder: this.element.find(this.options.folder).val()
             },
             this.options.level, '/Home/LogLevels');
+    },
+
+    _getReadData: function() {
+        return {
+            host: this.element.find(this.options.host).val(),
+            folder: this.element.find(this.options.folder).val(),
+            file: this.element.find(this.options.file).val(),
+            level: this.element.find(this.options.level).val()
+        };
     }
 });
