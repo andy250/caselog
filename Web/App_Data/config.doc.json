@@ -44,7 +44,7 @@
                     "levels": [
                         {
                             "name": "TRACE",
-                            "regex": "^\-+Trace\-+",
+                            "regex": "^\\-+Trace\\-+",
                             "ignoreCase": true
                         }
                     ]
