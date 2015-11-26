@@ -1,35 +1,26 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
-using System.Linq;
 using andy250.CaseLog.Core.Interfaces;
 
 namespace andy250.CaseLog.Core.Configuration
 {
     public class ConfigProvider : IConfigProvider
     {
-        private List<HostInfo> hosts;
-
         public ConfigProvider()
         {
             Reload();
         }
 
-        public List<HostInfo> GetHosts()
-        {
-            return hosts;
-        }
-
-        public HostInfo GetHost(string host)
-        {
-            return hosts.SingleOrDefault(x => string.Equals(x.name, host, StringComparison.OrdinalIgnoreCase));
-        }
+        public CaseLogConfig Config { get; private set; }
 
         public void Reload()
         {
-            hosts = JsonConvert.DeserializeObject<List<HostInfo>>(File.ReadAllText(
-                Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), "config.json")));
+            var path = Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), ConfigurationManager.AppSettings["configName"]);
+            var fileContent = File.ReadAllText(path);
+            Config = JsonConvert.DeserializeObject<CaseLogConfig>(fileContent);
+            Config.PropagateRelations(null);
         }
     }
 }

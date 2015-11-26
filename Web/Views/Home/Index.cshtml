@@ -11,7 +11,7 @@
             <select class="cl-select" id="host-select">
                 @foreach (var h in Model)
                 {
-                    <option value="@h.name">@h.name</option>
+                    <option value="@h.Name">@h.Name</option>
                 }
             </select>
         </div>
@@ -31,9 +31,7 @@
         <div class="cl-form-field flex-right">
             <div id="toolbar" class="">
                 <button id="reload-config">Reload config</button>
-                <a href="https://github.com/andy250/caselog/issues" target="_target">
-                    <button id="report-issue">Report issue</button>
-                </a>
+                <a href="https://github.com/andy250/caselog/issues" target="_target" id="report-issue">Report issue</a>
             </div>
         </div>
     </section>

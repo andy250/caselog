@@ -5,6 +5,7 @@ using andy250.CaseLog.Core.LogIO;
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(andy250.CaseLog.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(andy250.CaseLog.Web.App_Start.NinjectWebCommon), "Stop")]
 
+// ReSharper disable once CheckNamespace
 namespace andy250.CaseLog.Web.App_Start
 {
     using System;
@@ -69,7 +70,8 @@ namespace andy250.CaseLog.Web.App_Start
         {
             kernel.Bind<IConfigProvider>().To<ConfigProvider>().InSingletonScope();
             kernel.Bind<ILogReader>().To<LogReader>();
+            kernel.Bind<ILogSource>().To<FileLogSource>();
             kernel.Bind<IFileSystem>().To<FileSystem>();
-        }        
+        }
     }
 }

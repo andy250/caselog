@@ -1,29 +1,39 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using andy250.CaseLog.Core.Configuration;
 using andy250.CaseLog.Core.Interfaces;
-using andy250.CaseLog.Core.Models;
 
 namespace andy250.CaseLog.Core.FileIO
 {
     public class FileLogSource : ILogSource
     {
-        public FileLogSource(string path, string logLinePattern, List<LogLevel> logLevels)
+        public FileLogSource(string fullPath, FolderInfo folderInfo)
         {
-            Path = path;
-            LogLinePattern = logLinePattern;
+            FullPath = fullPath;
+            OpeningLinePattern = folderInfo.OpeningLinePattern;
 
-            if (logLevels != null)
+            if (folderInfo.Levels != null)
             {
                 LogLevels = new Dictionary<string, Regex>();
-                foreach (var level in logLevels)
+                foreach (var level in folderInfo.Levels)
                 {
-                    LogLevels.Add(level.name, new Regex(level.regex, RegexOptions.Compiled | RegexOptions.IgnoreCase));
+                    LogLevels.Add(level.Name, new Regex(level.Regex, GetOptions(level)));
                 }
             }
         }
 
-        public string Path { get; }
-        public string LogLinePattern { get; }
+        private RegexOptions GetOptions(LogLevel level)
+        {
+            var opts = RegexOptions.Compiled;
+            if (level.IgnoreCase)
+            {
+                opts = opts | RegexOptions.IgnoreCase;
+            }
+            return opts;
+        }
+
+        public string FullPath { get; }
+        public string OpeningLinePattern { get; }
         public Dictionary<string, Regex> LogLevels { get; }
     }
 }

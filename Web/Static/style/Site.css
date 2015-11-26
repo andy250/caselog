@@ -76,6 +76,7 @@ button.no-text.ui-button-text-icon-primary .ui-button-text {
 
     .cl-log-entry.cl-log-level-ERROR {
         color: #F00;
+        font-weight: bold;
     }
 
     .cl-log-entry.cl-log-level-WARN {

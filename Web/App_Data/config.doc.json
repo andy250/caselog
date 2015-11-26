@@ -1,19 +1,55 @@
-﻿[
-    {
-        "name": "localhost",
-        "folders": [
-            {
-                "name": "Logs1",
-                "path": "C:\\MyFolder\\Logs1",
-                "linePattern": "^\\d+\\s+\\[[A-Z][a-z]+\\]\\s+", // 1234	[Debug]
-                "filter": "*.log"
-            },
-            {
-                "name": "Logs2",
-                "path": "C:\\MyFolder\\Logs2",
-                "filter": "*.txt"
-            }
-        ]
-    }
-    // , { host2 } , { host 3 } , ...
-]
+﻿{
+    "filter": "*.log",
+    "openingLinePattern": "^\\d+\\s+\\[[a-z]+\\]\\s+",
+    "levels": [
+        {
+            "name": "ERROR",
+            "regex": "\\[Error\\]"
+        },
+        {
+            "name": "DEBUG",
+            "regex": "\\[Debug\\]"
+        }
+    ],
+    "hosts": [
+        {
+            "name": "Server 1",
+            "unc": "192.168.0.1",
+            "folders": [
+                {
+                    "name": "Logs 1",
+                    "path": "c$\\Logs1"
+                },
+                {
+                    "name": "Logs 2",
+                    "path": "NetworkShare\\Logs2"
+                }
+            ]
+        },
+        {
+            "name": "Server 2",
+            "unc": "192.168.0.2",
+            "filter": "*.txt",
+            "openingLinePattern": "^\\d+\\s+"
+            "folders": [
+                {
+                    "name": "Logs 3",
+                    "path": "c$\\Logs3"
+                },
+                {
+                    "name": "Logs 4",
+                    "path": "NetworkShare\\Logs4",
+                    "filter": "*.info",
+                    "openingLinePattern": "^\\d+\\s+",
+                    "levels": [
+                        {
+                            "name": "TRACE",
+                            "regex": "^\-+Trace\-+",
+                            "ignoreCase": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

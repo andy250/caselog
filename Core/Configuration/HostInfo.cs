@@ -4,14 +4,20 @@ using System.Linq;
 
 namespace andy250.CaseLog.Core.Configuration
 {
-    public class HostInfo
+    public class HostInfo : BaseConfig
     {
         public FolderInfo GetFolder(string folder)
         {
-            return folders.SingleOrDefault(x => string.Equals(x.name, folder, StringComparison.OrdinalIgnoreCase));
+            return Folders.SingleOrDefault(x => string.Equals(x.Name, folder, StringComparison.OrdinalIgnoreCase));
         }
 
-        public string name { get; set; }
-        public List<FolderInfo> folders { get; set; }
+        public string Name { get; set; }
+        public string Unc { get; set; }
+        public List<FolderInfo> Folders { get; set; }
+
+        public override IEnumerable<BaseConfig> GetChildConfigurations()
+        {
+            return Folders;
+        }
     }
 }

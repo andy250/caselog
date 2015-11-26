@@ -35,6 +35,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\BaseConfig.cs" />
+    <Compile Include="Configuration\CaseLogConfig.cs" />
     <Compile Include="Configuration\ConfigProvider.cs" />
     <Compile Include="Configuration\FolderInfo.cs" />
     <Compile Include="Configuration\HostInfo.cs" />
@@ -57,7 +60,7 @@
     <Compile Include="Interfaces\ILogReader.cs" />
     <Compile Include="Interfaces\ILogSource.cs" />
     <Compile Include="Models\LogEntry.cs" />
-    <Compile Include="Models\LogLevel.cs" />
+    <Compile Include="Configuration\LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

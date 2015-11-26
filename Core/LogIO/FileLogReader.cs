@@ -13,9 +13,9 @@ namespace andy250.CaseLog.Core.LogIO
         internal FileLogReader(FileLogSource logSource)
         {
             this.logSource = logSource;
-            if (!string.IsNullOrWhiteSpace(logSource.LogLinePattern))
+            if (!string.IsNullOrWhiteSpace(logSource.OpeningLinePattern))
             {
-                regex = new Regex(logSource.LogLinePattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+                regex = new Regex(logSource.OpeningLinePattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
             }
         }
 
@@ -23,7 +23,7 @@ namespace andy250.CaseLog.Core.LogIO
         {
             // TODO: allow to read from any position in file (to continue reading backwards)
             List<string> lines;
-            using (var fr = new FileReverseReader(logSource.Path))
+            using (var fr = new FileReverseReader(logSource.FullPath))
             {
                 lines = fr.Read(amountOfLogs);
                 lines.Reverse();
@@ -36,17 +36,17 @@ namespace andy250.CaseLog.Core.LogIO
         private List<LogEntry> ConvertToLogs(List<string> lines)
         {
             var result = new List<LogEntry>();
-
             LogEntry currentEntry = null;
 
             for (int index = 0; index < lines.Count; index++)
             {
-                if (index == 0 || IsNewEntry(lines[index], lines[index - 1]))
+                if (index == 0 || IsNewEntry(lines[index]))
                 {
-                    currentEntry = new LogEntry();
-                    currentEntry.LogLevel = GetLogLevel(lines[index]);
+                    currentEntry = new LogEntry { LogLevel = GetLogLevel(lines[index]) };
                     result.Add(currentEntry);
                 }
+
+                // ReSharper disable once PossibleNullReferenceException
                 currentEntry.AddLine(lines[index]);
             }
             
@@ -69,7 +69,7 @@ namespace andy250.CaseLog.Core.LogIO
             return null;
         }
 
-        private bool IsNewEntry(string nextLine, string prevLine)
+        private bool IsNewEntry(string nextLine)
         {
             if (regex != null)
             {
