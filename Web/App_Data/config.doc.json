@@ -11,6 +11,12 @@
             "regex": "\\[Debug\\]"
         }
     ],
+    "folders": [
+        {
+            "name": "Common Folder",
+            "path": "c$\\somepath\\Logs"
+        }
+    ],
     "hosts": [
         {
             "name": "Server 1",
