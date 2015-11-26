@@ -13,8 +13,7 @@ namespace andy250.CaseLog.Core.Configuration
 
         public string Name { get; set; }
         public string Unc { get; set; }
-        public List<FolderInfo> Folders { get; set; }
-
+        
         public override IEnumerable<BaseConfig> GetChildConfigurations()
         {
             return Folders;

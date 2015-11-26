@@ -7,6 +7,7 @@ namespace andy250.CaseLog.Core.Configuration
         private string filter;
         private string openingLinePattern;
         private List<LogLevel> levels;
+        private List<FolderInfo> folders;
 
         public BaseConfig ParentConfig { get; set; }
 
@@ -47,6 +48,19 @@ namespace andy250.CaseLog.Core.Configuration
                 return levels;
             }
             set { levels = value; }
+        }
+
+        public List<FolderInfo> Folders
+        {
+            get
+            {
+                if (folders == null && ParentConfig != null)
+                {
+                    return ParentConfig.Folders;
+                }
+                return folders;
+            }
+            set { folders = value; }
         }
 
         public abstract IEnumerable<BaseConfig> GetChildConfigurations();
