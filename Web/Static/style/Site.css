@@ -78,6 +78,10 @@ button.no-text.ui-button-text-icon-primary .ui-button-text {
         color: #F00;
     }
 
+    .cl-log-entry.cl-log-level-WARN {
+        color: #D70;
+    }
+
 .cl-log-entry-odd {
     background-color: #fafafa;
 }
