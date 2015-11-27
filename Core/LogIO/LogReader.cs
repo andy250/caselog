@@ -9,6 +9,7 @@ namespace andy250.CaseLog.Core.LogIO
     {
         public List<LogEntry> ReadFromEnd(ILogSource source)
         {
+            // TODO: use injecting dependecies to build proper log reader (file, sql, ...)
             // for now let's just read from file
             var fileSource = (FileLogSource) source;
             return new FileLogReader(fileSource).ReadFromEnd(500);

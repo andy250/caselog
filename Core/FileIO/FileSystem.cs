@@ -11,8 +11,13 @@ namespace andy250.CaseLog.Core.FileIO
         public List<FileInfo> GetFiles(HostInfo host, FolderInfo directory)
         {
             string directoryPath = directory.Absolute ? directory.Path : GetUncDirectory(host.Unc, directory.Path);
+
             var dir = new DirectoryInfo(directoryPath);
-            return dir.GetFiles(directory.Filter ?? "*").ToList();
+            if (dir.Exists)
+            {
+                return dir.GetFiles(directory.Filter ?? "*").ToList();
+            }
+            return new List<FileInfo>();
         }
 
         private string GetUncDirectory(string host, string directory)
