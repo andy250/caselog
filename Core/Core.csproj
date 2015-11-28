@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\BaseConfigWithFolders.cs" />
     <Compile Include="Configuration\BaseConfig.cs" />
     <Compile Include="Configuration\CaseLogConfig.cs" />
     <Compile Include="Configuration\ConfigProvider.cs" />

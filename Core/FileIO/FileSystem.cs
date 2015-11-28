@@ -8,16 +8,53 @@ namespace andy250.CaseLog.Core.FileIO
 {
     public class FileSystem : IFileSystem
     {
+        public List<DirectoryInfo> GetFolders(HostInfo host, FolderInfo directory)
+        {
+            if (!string.IsNullOrWhiteSpace(directory.SubfolderSearchPattern))
+            {
+                var directoryInfo = GetDirectoryInfo(host, directory);
+                if (directoryInfo.Exists)
+                {
+                    return directoryInfo.GetDirectories(directory.SubfolderSearchPattern).ToList();
+                }
+            }
+            return new List<DirectoryInfo>();
+        }
+
+        public bool Exists(HostInfo host, FolderInfo directory)
+        {
+            return GetDirectoryInfo(host, directory).Exists;
+        }
+
         public List<FileInfo> GetFiles(HostInfo host, FolderInfo directory)
         {
-            string directoryPath = directory.Absolute ? directory.Path : GetUncDirectory(host.Unc, directory.Path);
-
-            var dir = new DirectoryInfo(directoryPath);
-            if (dir.Exists)
+            var directoryInfo = GetDirectoryInfo(host, directory);
+            if (directoryInfo.Exists)
             {
-                return dir.GetFiles(directory.Filter ?? "*").ToList();
+                return directoryInfo.GetFiles(directory.Filter ?? "*").ToList();
             }
             return new List<FileInfo>();
+        }
+
+        public string ReadTextFile(string path)
+        {
+            return File.ReadAllText(path);
+        }
+
+        public string CombinePath(params string[] paths)
+        {
+            return Path.Combine(paths);
+        }
+
+        private DirectoryInfo GetDirectoryInfo(HostInfo host, FolderInfo directory)
+        {
+            string directoryPath = GetDirectoryPath(host, directory);
+            return new DirectoryInfo(directoryPath);
+        }
+
+        private string GetDirectoryPath(HostInfo host, FolderInfo directory)
+        {
+            return directory.Absolute ? directory.Path : GetUncDirectory(host.Unc, directory.Path);
         }
 
         private string GetUncDirectory(string host, string directory)

@@ -5,5 +5,10 @@
         public string Name { get; set; }
         public string Regex { get; set; }
         public bool IgnoreCase { get; set; }
+
+        public LogLevel Copy()
+        {
+            return (LogLevel) MemberwiseClone();
+        }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using andy250.CaseLog.Core.Interfaces;
 
 namespace andy250.CaseLog.Core.Configuration
 {
-    public class CaseLogConfig : BaseConfig
+    public class CaseLogConfig : BaseConfigWithFolders
     {
         public HostInfo GetHost(string host)
         {
@@ -13,7 +14,18 @@ namespace andy250.CaseLog.Core.Configuration
 
         public List<HostInfo> Hosts { get; set; }
 
-        public override IEnumerable<BaseConfig> GetChildConfigurations()
+        internal override void ManageFolders(IFileSystem fileSystem)
+        {
+            if (Hosts != null)
+            {
+                foreach (var host in Hosts)
+                {
+                    host.ManageFolders(fileSystem);
+                }
+            }
+        }
+
+        internal override IEnumerable<BaseConfig> GetChildConfigurations()
         {
             return Hosts;
         }

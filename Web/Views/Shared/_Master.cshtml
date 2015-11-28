@@ -14,9 +14,12 @@
     <script src="~/Static/libs/jquery-ui.js"></script>
     <script src="~/Static/libs/jquery.history.js"></script>
     <script src="~/Static/scripts/Master.js"></script>
+    <script src="~/Static/scripts/Tools.js"></script>
     @RenderSection("js", required: false)
     <script>
         $(document).ready(function () {
+            $(document).find('#toolbar').Tools();
+
             @RenderSection("docReady", required: false)
         });
     </script>

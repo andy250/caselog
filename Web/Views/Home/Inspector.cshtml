@@ -41,7 +41,6 @@
 {
     <script src="~/Static/scripts/LogNavigator.js"></script>
     <script src="~/Static/scripts/LogReader.js"></script>
-    <script src="~/Static/scripts/Tools.js"></script>
 }
 
 @section docReady
@@ -74,6 +73,4 @@
         startupHost: '@Model.SelectedHost',
         startupFolder: '@Model.SelectedFolder'
     });
-
-    $(document).find('#toolbar').Tools();
 }

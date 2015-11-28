@@ -24,7 +24,8 @@
             "folders": [
                 {
                     "name": "Logs 1",
-                    "path": "c$\\Logs1"
+                    "path": "c$\\Logs1",
+                    "subfolderSearchPattern": "*Logs_*"
                 },
                 {
                     "name": "Logs 2",
