@@ -158,6 +158,7 @@
     <None Include="App_Data\config.doc.json" />
     <None Include="Properties\PublishProfiles\201.pubxml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
